@@ -1,0 +1,86 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+#
+#  Logic/syllogism/__init__.py
+#  Logic Library::Categorical Syllogisms::Proposition Forms
+#  
+#  Copyright 2013 Wade Harkins <vdtdev@gmail.com>
+#  
+#  This program is free software; you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation; either version 2 of the License, or
+#  (at your option) any later version.
+#  
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#  
+#  You should have received a copy of the GNU General Public License
+#  along with this program; if not, write to the Free Software
+#  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+#  MA 02110-1301, USA.
+#  
+#  
+
+class Form:
+	def __init__(self,universal,affirmative):
+		self._universal_=universal
+		self._affirmative_=affirmative
+		self._name_="unnamed"
+	
+	def __set_name__(self,name):
+		self._name_=name
+	
+	def __get_name__(self):
+		return self._name_
+
+
+	def __get_universal__(self):
+		return self._universal_
+
+	def __get_affirmative__(self):
+		return self._affirmative_
+	
+	affirmative = property(__get_affirmative__,None,"Is form affirmative")
+	universal = property(__get_affirmative__,None,"Is form affirmative")
+	name = property(__get_name__,__set_name__,None,"Form name")
+	
+	def A(self):
+		f = Form(True,True)
+		f.name="A"
+		return f
+	
+	def E(self):
+		f = Form(True,False)
+		f.name="E"
+		return f
+	
+	def I(self):
+		f = Form(False,True)
+		f.name="I"
+		return f
+	
+	def O(self):
+		f = Form(False, False)
+		f.name="O"
+		return f
+	
+	def FormDict(self):
+		d = dict()
+		d["A"]=self.A()
+		d["E"]=self.E()
+		d["I"]=self.I()
+		d["O"]=self.O()
+		return d
+
+class Mood:
+	
+	def __init__(self,major,minor,conclusion):
+		self._major=major
+		self._minor=minor
+		self._conclusion=conclusion
+	
+	def MoodName(self):
+		return self._major.name + self._minor.name + self._conclusion.name
+		
