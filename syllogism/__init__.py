@@ -109,6 +109,7 @@ class Statement:
 	terms = property(__get_terms__,None,None,"Terms")
 	form = property(__get_form__,None,None,"Form")
 	
+	""" Forms a sentence from the terms and specified form """
 	def sentence(self):
 		quant = ""
 		copula = ""
@@ -148,15 +149,18 @@ class Syllogism:
 	minor = property(__get_minor__,None,None,"Minor premise")
 	conclusion = property(__get_conclusion__,None,None,"Conclusion")
 	
+	""" Returns a 3 character mood type """
 	def mood(self):
 		return self._maj.form.name + self._min.form.name + self._con.form.name
 
+	""" Prints out a standard form syllogism """
 	def formal(self):
 		print self._maj.sentence()
 		print self._min.sentence()
 		print "------------------------"
 		print self._con.sentence()
 		
+	""" Determins the figure of the syllogism"""
 	def figure(self):
 		s = self._con.terms.subject
 		p = self._con.terms.predicate
